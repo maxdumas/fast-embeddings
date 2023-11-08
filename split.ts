@@ -1,9 +1,3 @@
-//filter will reemit the data if cb(err,pass) pass is truthy
-
-// reduce is more tricky
-// maybe we want to group the reductions or emit progress updates occasionally
-// the most basic reduce just emits one 'data' event after it has received 'end'
-
 import through from "through2";
 import { StringDecoder } from "string_decoder";
 import { Transform } from "node:stream";
