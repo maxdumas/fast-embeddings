@@ -1,7 +1,8 @@
-import { map, zip, zipAll } from "lodash/fp";
+import { Readable } from "node:stream";
+
+import { map, zip } from "lodash/fp";
 import OpenAI from "openai";
 import { batch, compose, flatMap, parallelMap } from "stromjs";
-import { Readable } from "node:stream";
 
 import { split } from "./split.ts";
 
