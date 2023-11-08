@@ -1,4 +1,3 @@
-import through from "through2";
 import { StringDecoder } from "string_decoder";
 import { Transform } from "node:stream";
 
@@ -42,18 +41,19 @@ export function split(
     }
   }
 
-  return through.obj(
-    function (chunk, enc, cb) {
+  return new Transform({
+    objectMode: true,
+    transform(chunk, encoding, callback) {
       const d = decoder.write(chunk);
       next(this, d);
-      cb();
+      callback();
     },
-    function (cb) {
+    flush(callback) {
       next(this, decoder.end());
       if (options.trailing) {
         emit(this, soFar);
       }
-      cb();
-    }
-  );
+      callback();
+    },
+  });
 }
